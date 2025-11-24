@@ -1,0 +1,122 @@
+import java.util.Scanner;
+
+public class SettingService {
+
+    // user details update operations
+
+    // change username
+    public void changeUserName() {
+
+        // 1st we check if user is logged in or not
+        if (Database.currentUser == null) {
+            System.out.println("Login first to change username");
+            return;
+        }
+
+        // to get input from user
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter your current password to confirm: ");
+        String pass = sc.next();
+
+        // verifying the pass
+        if (Database.currentUser.getPassword().equals(pass)) {
+
+            System.out.println("Enter new Username: ");
+            String newName = sc.next();
+
+            // we check if username is taken as we want each username to be unique
+            if (Database.userDatabase.containsKey(newName)) {
+                System.out.println("This username is taken");
+            } else {
+
+                // if username is okay
+
+                String oldName = Database.currentUser.getUserName();
+
+                // 1st we remove the old name from database
+                Database.userDatabase.remove(oldName);
+
+                // then we set the new name for user
+                Database.currentUser.setUserName(newName);
+
+                // then we update the database with new updated information
+                Database.userDatabase.put(newName, Database.currentUser);
+
+                System.out.println("\n Username changed to: " + newName);
+            }
+        } else {
+            System.out.println("Wrong credentials. Please try again!");
+        }
+    }
+
+    // change password
+    public void changePassword() {
+
+        // 1st we check if user is logged in or not
+        if (Database.currentUser == null) {
+            System.out.println("Login first to change username");
+            return;
+        }
+
+        // to get input from user
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter your current password to confirm: ");
+        String oldPass = sc.next();
+
+        // verifying the pass
+        if (Database.currentUser.getPassword().equals(oldPass)) {
+
+            System.out.println("Enter new password: ");
+            String newPass = sc.next();
+
+            // we validate the new password
+            if (Validation.isValid(newPass)) {
+
+                // we update password for user
+                Database.currentUser.setPassword(newPass);
+
+                System.out.println("Password successfully updated");
+            }
+        } else {
+            System.out.println("Wrong credentials. Please try again!");
+        }
+    }
+
+    // user details delete operation
+
+    // delete user
+    public void delete() {
+
+        // 1st we check if user is logged in or not
+        if (Database.currentUser == null) {
+            System.out.println("Login first to change username");
+            return;
+        }
+
+        // to get input from user
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter your current password to confirm: ");
+        String oldPass = sc.next();
+
+        // verifying the pass
+        if (Database.currentUser.getPassword().equals(oldPass)) {
+
+            // 1st we get username
+            String userName = Database.currentUser.getUserName();
+
+            // remove/delete the username from database
+            Database.userDatabase.remove(userName);
+
+            System.out.println("Account deleted");
+
+            // if the account is deleted then no user is logged in
+            Database.currentUser = null;
+
+        } else {
+            System.out.println("Wrong credentials. Please try again!");
+        }
+    }
+}
