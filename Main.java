@@ -13,7 +13,7 @@ public class Main {
         System.out.println("Welcome to our Bank!!");
 
         while (true) {
-            System.out.println("1 Register\n2 Login\n3 Deposit\n4 Withdraw\n5 History\n");
+            System.out.println("1 Register\n2 Login\n3 Deposit\n4 Withdraw\n5 History");
             System.out.println("6 Change Username\n7 Change Password\n8 Delete Account\n9 Logout");
             System.out.println("Enter choice");
             int choice = sc.nextInt();
@@ -91,3 +91,4 @@ public class Main {
         }
     }
 }
+
