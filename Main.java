@@ -7,12 +7,14 @@ public class Main {
         // to get input from user
         Scanner sc = new Scanner(System.in);
 
-        Service bankService = new Service();
+        UserService bankService = new UserService();
+        SettingService settingService = new SettingService();
 
         System.out.println("Welcome to our Bank!!");
 
         while (true) {
-            System.out.println("1 Register\n2 Login\n3 Deposit\n4 Withdraw\n5 History\n6 Logout");
+            System.out.println("1 Register\n2 Login\n3 Deposit\n4 Withdraw\n5 History\n");
+            System.out.println("6 Change Username\n7 Change Password\n8 Delete Account\n9 Logout");
             System.out.println("Enter choice");
             int choice = sc.nextInt();
 
@@ -30,7 +32,7 @@ public class Main {
 
                     // if yes we register the user
                     bankService.register(username, password);
-                    System.out.println("User Registered");
+                    System.out.println("\nUser Registered\n");
                 }
             } else if (choice == 2) { // 2: Login
 
@@ -42,6 +44,7 @@ public class Main {
 
                 // login the user
                 bankService.login(username, password);
+                System.out.println("\nUser Logged In\n");
             } else if (choice == 3) { // 3: Deposit
 
                 // ask for amount
@@ -62,7 +65,20 @@ public class Main {
 
                 // get Transactional History
                 bankService.printHistory();
-            } else if (choice == 6) { // 6: Logout
+            } else if (choice == 6) { // 6: Change Username
+
+                // change username
+                settingService.changeUserName();
+            } else if (choice == 7) { // 7: Change Password
+
+                // change password
+                settingService.changePassword();
+            } else if (choice == 8) { // 8: Delete Account
+
+                // delete account
+                settingService.delete();
+                break;
+            } else if (choice == 9) { // 9: Logout
 
                 // logout
                 bankService.logout();
@@ -71,7 +87,6 @@ public class Main {
             } else {
 
                 System.out.println("Invalid Choice. Try Again");
-                break;
             }
         }
     }
