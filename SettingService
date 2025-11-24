@@ -55,7 +55,7 @@ public class SettingService {
 
         // 1st we check if user is logged in or not
         if (Database.currentUser == null) {
-            System.out.println("Login first to change username");
+            System.out.println("Login first to change password");
             return;
         }
 
@@ -91,7 +91,7 @@ public class SettingService {
 
         // 1st we check if user is logged in or not
         if (Database.currentUser == null) {
-            System.out.println("Login first to change username");
+            System.out.println("Login first to delete account");
             return;
         }
 
